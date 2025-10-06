@@ -17,5 +17,11 @@ public class MemberFood {
     private Long id;
 
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "food_id")
+    private Food food;
 }

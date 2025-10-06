@@ -1,5 +1,6 @@
 package com.example.umc9th.domain.review.entity;
 
+import com.example.umc9th.domain.restaurant.entity.Region;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,4 +19,14 @@ public class Review {
 
     @Column(name = "content", nullable = false)
     private String content;
+
+
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "reivew_photo_id")
+    private ReviewPhoto reviewPhoto;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "review_reply_id")
+    private ReviewReply reviewReply;
 }
