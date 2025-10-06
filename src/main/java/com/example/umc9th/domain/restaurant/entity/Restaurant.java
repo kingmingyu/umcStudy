@@ -36,8 +36,12 @@ public class Restaurant {
     @JoinColumn(name = "region_id")
     private Region region;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
+
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.REMOVE)
-    private List<Mission> MissonList = new ArrayList<>();
+    private List<Mission> MissionList = new ArrayList<>();
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.REMOVE)
     private List<Review> ReviewList = new ArrayList<>();

@@ -25,4 +25,7 @@ public class Mission {
     @Builder.Default
     private int isActive = 0;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
 }
