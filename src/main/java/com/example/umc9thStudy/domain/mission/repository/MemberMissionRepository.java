@@ -1,8 +1,7 @@
 package com.example.umc9thStudy.domain.mission.repository;
 
-import com.example.umc9thStudy.domain.mission.dto.MyMissionDto;
+import com.example.umc9thStudy.domain.mission.dto.res.MissionResponse;
 import com.example.umc9thStudy.domain.mission.entity.MemberMission;
-import com.example.umc9thStudy.domain.mission.entity.Mission;
 import com.example.umc9thStudy.domain.mission.enums.Status;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -41,7 +40,7 @@ LIMIT ?;
 public interface MemberMissionRepository extends JpaRepository<MemberMission, Long> {
     @Query(
             // DTO로 r.name, m.minimumPrice, m.reward 조회하기
-            "SELECT new com.example.umc9thStudy.domain.mission.dto.MyMissionDto(r.name, m.minimumPrice, m.rewardPoint)" +
+            "SELECT new com.example.umc9thStudy.domain.mission.dto.res.MissionResponse$MyMissionResponse(r.name, m.minimumPrice, m.rewardPoint)" +
 
                     //JPQL로 조회
                     "FROM MemberMission mm "+
@@ -52,11 +51,11 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
                     "AND mm.status = :status " +
 
                     //페이징
-                    "AND m.id < :lastMissionId " +
+                    "AND (:lastMissionId IS NULL OR m.id < :lastMissionId)" +
 
                     "ORDER BY m.id DESC"
     )
-    List<MyMissionDto> findMyMission(
+    List<MissionResponse.MyMissionResponse> findMyMission(
             @Param("userId") Long userId,
             @Param("status") Status status,
             @Param("lastMissionId") Long lastMissionId,

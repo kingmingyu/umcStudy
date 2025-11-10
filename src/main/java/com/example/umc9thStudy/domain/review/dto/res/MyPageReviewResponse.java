@@ -1,4 +1,4 @@
-package com.example.umc9thStudy.domain.review.dto;
+package com.example.umc9thStudy.domain.review.dto.res;
 
 import com.example.umc9thStudy.domain.review.entity.Review;
 
