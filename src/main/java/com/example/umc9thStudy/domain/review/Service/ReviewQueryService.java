@@ -1,6 +1,6 @@
 package com.example.umc9thStudy.domain.review.Service;
 
-import com.example.umc9thStudy.domain.review.dto.MyPageReviewResponse;
+import com.example.umc9thStudy.domain.review.dto.res.MyPageReviewResponse;
 import com.example.umc9thStudy.domain.review.entity.QReview;
 import com.example.umc9thStudy.domain.review.entity.Review;
 import com.example.umc9thStudy.domain.review.repository.ReviewRepository;

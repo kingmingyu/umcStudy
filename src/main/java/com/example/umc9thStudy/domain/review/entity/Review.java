@@ -2,6 +2,7 @@ package com.example.umc9thStudy.domain.review.entity;
 
 import com.example.umc9thStudy.domain.member.entity.Member;
 import com.example.umc9thStudy.domain.restaurant.entity.Restaurant;
+import com.example.umc9thStudy.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +12,7 @@ import lombok.*;
 @Getter
 @Builder
 @Table(name = "review")
-public class Review {
+public class Review extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

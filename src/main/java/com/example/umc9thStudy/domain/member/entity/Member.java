@@ -26,6 +26,9 @@ public class Member extends BaseEntity {
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
+    @Column(name = "email", nullable = false)
+    private String email;
+
     @Column(name = "gender", nullable = false)
     @Enumerated(EnumType.STRING)
     @Builder.Default
