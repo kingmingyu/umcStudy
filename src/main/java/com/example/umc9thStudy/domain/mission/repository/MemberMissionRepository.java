@@ -66,5 +66,5 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
 
     long countByMemberIdAndStatus(Long memberId, Status status);
 
-    boolean existsByUserAndId(Member member, Mission mission);
+    boolean existsByMemberAndId(Member member, Mission mission);
 }

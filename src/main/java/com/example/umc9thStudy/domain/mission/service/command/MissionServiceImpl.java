@@ -30,7 +30,7 @@ public class MissionServiceImpl implements MissionService{
         Member member = memberRepository.findById(memberId).orElseThrow(() -> new MemberException(MemberErrorCode.MEMBER_NOT_FOUND));
         Mission mission = missionRepository.findById(missionId).orElseThrow(() -> new MissionException(MissionErrorCode.MISSION_NOT_FOUND));
 
-        if(memberMissionRepository.existsByUserAndId(member, mission)){
+        if(memberMissionRepository.existsByMemberAndId(member, mission)){
             throw new MemberMissionException(MemberMissionErrorCode.EXIST_MISSION);
         }
 
