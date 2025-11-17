@@ -1,4 +1,4 @@
-package com.example.umc9thStudy.domain.mission.service;
+package com.example.umc9thStudy.domain.mission.service.query;
 
 import com.example.umc9thStudy.domain.mission.dto.res.MissionResponse;
 import com.example.umc9thStudy.domain.mission.enums.Status;

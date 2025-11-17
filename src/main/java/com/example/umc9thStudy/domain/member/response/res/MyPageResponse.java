@@ -1,6 +1,5 @@
-package com.example.umc9thStudy.domain.member.dto.res;
+package com.example.umc9thStudy.domain.member.response.res;
 
-import com.example.umc9thStudy.domain.member.entity.Member;
 import lombok.Builder;
 import lombok.Getter;
 
