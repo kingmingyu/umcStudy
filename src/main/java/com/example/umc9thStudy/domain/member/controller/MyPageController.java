@@ -1,13 +1,13 @@
 package com.example.umc9thStudy.domain.member.controller;
 
 import com.example.umc9thStudy.domain.member.converter.MemberConverter;
-import com.example.umc9thStudy.domain.member.dto.res.MyPageResponse;
+import com.example.umc9thStudy.domain.member.response.res.MyPageResponse;
 import com.example.umc9thStudy.domain.member.entity.Member;
 import com.example.umc9thStudy.domain.member.service.MemberService;
 import com.example.umc9thStudy.domain.mission.dto.res.MissionResponse;
 import com.example.umc9thStudy.domain.mission.enums.Status;
 import com.example.umc9thStudy.domain.mission.exception.code.MissionErrorCode;
-import com.example.umc9thStudy.domain.mission.service.MemberMissionService;
+import com.example.umc9thStudy.domain.mission.service.query.MemberMissionService;
 import com.example.umc9thStudy.domain.review.Service.ReviewQueryService;
 import com.example.umc9thStudy.domain.review.dto.res.MyPageReviewResponse;
 import com.example.umc9thStudy.global.apiPayload.ApiResponse;

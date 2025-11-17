@@ -1,7 +1,9 @@
 package com.example.umc9thStudy.domain.mission.repository;
 
+import com.example.umc9thStudy.domain.member.entity.Member;
 import com.example.umc9thStudy.domain.mission.dto.res.MissionResponse;
 import com.example.umc9thStudy.domain.mission.entity.MemberMission;
+import com.example.umc9thStudy.domain.mission.entity.Mission;
 import com.example.umc9thStudy.domain.mission.enums.Status;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -63,4 +65,6 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
     );
 
     long countByMemberIdAndStatus(Long memberId, Status status);
+
+    boolean existsByUserAndId(Member member, Mission mission);
 }

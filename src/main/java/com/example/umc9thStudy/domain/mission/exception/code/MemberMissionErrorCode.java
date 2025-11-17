@@ -7,13 +7,9 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @AllArgsConstructor
-public enum MissionErrorCode implements BaseErrorCode {
+public enum MemberMissionErrorCode implements BaseErrorCode {
 
-    // 400
-    INVALID_MISSION_STATUS(HttpStatus.BAD_REQUEST, "MISSION400_1", "잘못된 미션 상태 요청입니다."),
-
-    //404
-    MISSION_NOT_FOUND(HttpStatus.NOT_FOUND, "MISSION404_1", "id값에 해당하는 미션을 찾지 못했습니다.");
+    EXIST_MISSION(HttpStatus.BAD_REQUEST, "MEMBERMISSION400_1", "이미 존재하는 id의 미션입니다.");
 
     private final HttpStatus status;
     private final String code;
