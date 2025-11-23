@@ -1,5 +1,6 @@
 package com.example.umc9thStudy.domain.mission.dto.res;
 
+import com.example.umc9thStudy.domain.restaurant.entity.Restaurant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,4 +24,11 @@ public class MissionResponse {
         private int rewardPoint;
         private Long minimumPrice;
     }
+
+    @Builder
+    public record MemberMissionResponse(
+            int rewardPoint,
+            Long minimumPrice,
+            Restaurant restaurant
+    ){}
 }
