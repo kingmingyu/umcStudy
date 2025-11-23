@@ -1,12 +1,20 @@
-package com.example.umc9thStudy.domain.review.Service;
+package com.example.umc9thStudy.domain.review.Service.query;
 
+import com.example.umc9thStudy.domain.restaurant.entity.Restaurant;
+import com.example.umc9thStudy.domain.restaurant.exception.RestaurantException;
+import com.example.umc9thStudy.domain.restaurant.exception.code.RestaurantErrorCode;
+import com.example.umc9thStudy.domain.restaurant.repository.RestaurantRepository;
+import com.example.umc9thStudy.domain.review.converter.ReviewConverter;
 import com.example.umc9thStudy.domain.review.dto.res.MyPageReviewResponse;
+import com.example.umc9thStudy.domain.review.dto.res.ReviewResponse;
 import com.example.umc9thStudy.domain.review.entity.QReview;
 import com.example.umc9thStudy.domain.review.entity.Review;
 import com.example.umc9thStudy.domain.review.repository.ReviewRepository;
 import com.querydsl.core.BooleanBuilder;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,9 +24,10 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
-public class ReviewQueryService {
+public class ReviewQueryServiceImpl implements ReviewQueryService{
 
     private final ReviewRepository reviewRepository;
+    private final RestaurantRepository restaurantRepository;
 
     public List<MyPageReviewResponse> getReview(String query, String type) {
 
@@ -60,5 +69,17 @@ public class ReviewQueryService {
 
         //return
         return dtoList;
+    }
+
+    @Override
+    public ReviewResponse.ReviewPreviewListDTO findReview(String restaurantName, Integer page) {
+
+        Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElseThrow(()
+                -> new RestaurantException(RestaurantErrorCode.RESTAURANT_NOT_FOUND));
+
+        PageRequest pageRequest = PageRequest.of(page, 5);
+        Page<Review> result = reviewRepository.findAllByRestaurant(restaurant, pageRequest);
+
+        return ReviewConverter.toReviewPreviewListDTO(result);
     }
 }
