@@ -8,7 +8,7 @@ import com.example.umc9thStudy.domain.mission.dto.res.MissionResponse;
 import com.example.umc9thStudy.domain.mission.enums.Status;
 import com.example.umc9thStudy.domain.mission.exception.code.MissionErrorCode;
 import com.example.umc9thStudy.domain.mission.service.query.MemberMissionService;
-import com.example.umc9thStudy.domain.review.Service.ReviewQueryService;
+import com.example.umc9thStudy.domain.review.Service.query.ReviewQueryServiceImpl;
 import com.example.umc9thStudy.domain.review.dto.res.MyPageReviewResponse;
 import com.example.umc9thStudy.global.apiPayload.ApiResponse;
 import com.example.umc9thStudy.global.apiPayload.code.GeneralSuccessCode;
@@ -26,7 +26,7 @@ import java.util.List;
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public class MyPageController {
 
-    private final ReviewQueryService reviewQueryService;
+    private final ReviewQueryServiceImpl reviewQueryService;
     private final MemberService memberService;
     private final MemberMissionService memberMissionService;
 

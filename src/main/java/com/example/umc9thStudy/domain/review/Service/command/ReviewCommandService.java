@@ -1,14 +1,12 @@
-package com.example.umc9thStudy.domain.review.Service;
+package com.example.umc9thStudy.domain.review.Service.command;
 
 import com.example.umc9thStudy.domain.member.entity.Member;
 import com.example.umc9thStudy.domain.member.exception.code.MemberErrorCode;
 import com.example.umc9thStudy.domain.member.repository.MemberRepository;
 import com.example.umc9thStudy.domain.restaurant.entity.Restaurant;
-import com.example.umc9thStudy.domain.restaurant.exception.RestaurantException;
 import com.example.umc9thStudy.domain.restaurant.exception.code.RestaurantErrorCode;
 import com.example.umc9thStudy.domain.restaurant.repository.RestaurantRepository;
 import com.example.umc9thStudy.domain.review.entity.Review;
-import com.example.umc9thStudy.domain.review.entity.ReviewReply;
 import com.example.umc9thStudy.domain.review.repository.ReviewRepository;
 import com.example.umc9thStudy.global.apiPayload.exception.GeneralException;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class ReviewService {
+public class ReviewCommandService {
 
     private final ReviewRepository reviewRepository;
     private final RestaurantRepository restaurantRepository;
