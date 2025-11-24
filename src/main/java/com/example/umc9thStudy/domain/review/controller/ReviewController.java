@@ -40,7 +40,8 @@ public class ReviewController implements ReviewControllerDocs{
             @RequestParam String restaurantName,
             @CheckPage @RequestParam(defaultValue = "1") Integer page
     ){
+        int adjustedPage = page - 1;
         ReviewSuccessCode code = ReviewSuccessCode.REVIEW_OK;
-        return ApiResponse.onSuccess(code, reviewQueryService.findReview(restaurantName, page));
+        return ApiResponse.onSuccess(code, reviewQueryService.findReview(restaurantName, adjustedPage));
     }
 }
