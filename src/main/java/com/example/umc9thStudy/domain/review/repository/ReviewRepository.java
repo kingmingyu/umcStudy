@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review, Long>, ReviewQueryDsl {
     List<Review> findAllByRestaurant(Restaurant restaurant);
-    List<Review> findAllByMember(Member member);
+    Page<Review> findAllByMember(Member member, Pageable pageRequest);
 
     Page<Review> findAllByRestaurant(Restaurant restaurant, Pageable pageRequest);
 }

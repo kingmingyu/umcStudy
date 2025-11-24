@@ -36,4 +36,25 @@ public class ReviewConverter {
                 .created_at(review.getCreatedAt())
                 .build();
     }
+
+    //result -> dto
+    public static ReviewResponse.MyReviewListDTO toMyReviewListDTO(Page<Review> result){
+        return ReviewResponse.MyReviewListDTO.builder()
+                .reviewList(result.getContent().stream()
+                        .map(ReviewConverter::toMyReviewDTO).toList())
+                .listSize(result.getSize())
+                .totalPage(result.getTotalPages())
+                .totalElements(result.getTotalElements())
+                .isFirst(result.isFirst())
+                .isLast(result.isLast())
+                .build();
+    }
+    public static ReviewResponse.MyReviewDTO toMyReviewDTO(Review review){
+        return ReviewResponse.MyReviewDTO.builder()
+                .restaurantNickname(review.getRestaurant().getName())
+                .starRate(review.getStarRate())
+                .content(review.getContent())
+                .created_at(review.getCreatedAt())
+                .build();
+    }
 }

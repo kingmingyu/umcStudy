@@ -10,6 +10,9 @@ import com.example.umc9thStudy.domain.mission.exception.code.MissionErrorCode;
 import com.example.umc9thStudy.domain.mission.service.query.MemberMissionService;
 import com.example.umc9thStudy.domain.review.Service.query.ReviewQueryServiceImpl;
 import com.example.umc9thStudy.domain.review.dto.res.MyPageReviewResponse;
+import com.example.umc9thStudy.domain.review.dto.res.ReviewResponse;
+import com.example.umc9thStudy.domain.review.exception.code.ReviewSuccessCode;
+import com.example.umc9thStudy.global.annotation.CheckPage;
 import com.example.umc9thStudy.global.apiPayload.ApiResponse;
 import com.example.umc9thStudy.global.apiPayload.code.GeneralSuccessCode;
 import com.example.umc9thStudy.global.apiPayload.exception.GeneralException;
@@ -24,7 +27,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
-public class MyPageController {
+public class MyPageController implements MyPageControllerDocs{
 
     private final ReviewQueryServiceImpl reviewQueryService;
     private final MemberService memberService;
@@ -41,14 +44,25 @@ public class MyPageController {
         return ApiResponse.onSuccess(GeneralSuccessCode.OK, response);
     }
 
-    //내가 작성한 리뷰 모아보기
-    @GetMapping("/mypage/reivews")
+    //내가 작성한 리뷰 모아보기(별점순, 가게별)
+    @GetMapping("/mypage/reviews/search")
     public ApiResponse<List<MyPageReviewResponse>> getMypageReviews(
             @RequestParam String query,
             @RequestParam String type
     ){
         List<MyPageReviewResponse> result = reviewQueryService.getReview(query, type);
         return ApiResponse.onSuccess(GeneralSuccessCode.OK, result);
+    }
+
+    // 내가 쓴 리뷰 목록 보기
+    @GetMapping("/mypage/reviews")
+    public ApiResponse<ReviewResponse.MyReviewListDTO> getMyReviews(
+            @CheckPage @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam Long memberId
+    ){
+        int adjustedPage = page - 1;
+        ReviewSuccessCode code = ReviewSuccessCode.REVIEW_OK;
+        return ApiResponse.onSuccess(code, reviewQueryService.findMyReviews(memberId, adjustedPage));
     }
 
     //현재 진행중, 진행 완료한 미션 모아보기

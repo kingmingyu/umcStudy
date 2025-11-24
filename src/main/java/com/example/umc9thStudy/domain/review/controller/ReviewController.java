@@ -7,6 +7,7 @@ import com.example.umc9thStudy.domain.review.dto.req.ReviewRequest;
 import com.example.umc9thStudy.domain.review.dto.res.ReviewResponse;
 import com.example.umc9thStudy.domain.review.entity.Review;
 import com.example.umc9thStudy.domain.review.exception.code.ReviewSuccessCode;
+import com.example.umc9thStudy.global.annotation.CheckPage;
 import com.example.umc9thStudy.global.apiPayload.ApiResponse;
 import com.example.umc9thStudy.global.apiPayload.code.GeneralSuccessCode;
 import lombok.AccessLevel;
@@ -37,7 +38,7 @@ public class ReviewController implements ReviewControllerDocs{
     @GetMapping("/reviews")
     public ApiResponse<ReviewResponse.ReviewPreviewListDTO> getReviews(
             @RequestParam String restaurantName,
-            @RequestParam(defaultValue = "1") Integer page
+            @CheckPage @RequestParam(defaultValue = "1") Integer page
     ){
         ReviewSuccessCode code = ReviewSuccessCode.REVIEW_OK;
         return ApiResponse.onSuccess(code, reviewQueryService.findReview(restaurantName, page));

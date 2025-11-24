@@ -1,4 +1,4 @@
-package com.example.umc9thStudy.domain.review.controller;
+package com.example.umc9thStudy.domain.member.controller;
 
 import com.example.umc9thStudy.domain.review.dto.res.ReviewResponse;
 import com.example.umc9thStudy.global.annotation.CheckPage;
@@ -7,18 +7,18 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.web.bind.annotation.RequestParam;
 
-public interface ReviewControllerDocs {
+public interface MyPageControllerDocs {
 
     @Operation(
-            summary = "가게의 리뷰 목록 조회 API",
-            description = "특정 가게의 리뷰를 모두 조회합니다. 페이지네이션으로 제공"
+            summary = "내가 쓴 리뷰 목록 조회 API By 김민규 (개발 완료)",
+            description = "내가 작성한 리뷰를 모두 조회합니다. 페이지네이션으로 제공"
     )
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "실패")
     })
-    ApiResponse<ReviewResponse.ReviewPreviewListDTO> getReviews(
-            @RequestParam String restaurantName,
-            @CheckPage @RequestParam Integer page
+    ApiResponse<ReviewResponse.MyReviewListDTO> getMyReviews(
+            @CheckPage @RequestParam Integer page,
+            @RequestParam Long memberId
     );
 }

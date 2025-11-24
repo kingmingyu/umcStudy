@@ -11,4 +11,7 @@ public interface ReviewQueryService {
 
     //가게에서 리뷰 리스트 보기
     ReviewResponse.ReviewPreviewListDTO findReview(String restaurantName, Integer page);
+
+    //내가 작성한 리뷰 모아보기
+    ReviewResponse.MyReviewListDTO findMyReviews(Long memberId, Integer page);
 }
