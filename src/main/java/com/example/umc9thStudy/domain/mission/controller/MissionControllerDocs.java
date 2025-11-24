@@ -1,6 +1,7 @@
 package com.example.umc9thStudy.domain.mission.controller;
 
 import com.example.umc9thStudy.domain.mission.dto.res.MissionResponse;
+import com.example.umc9thStudy.global.annotation.CheckPage;
 import com.example.umc9thStudy.global.apiPayload.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -18,7 +19,7 @@ public interface MissionControllerDocs {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "실패")
     })
     ApiResponse<MissionResponse.RestaurantMissionListDTO> getRestaurantMissions(
-            @RequestParam(defaultValue = "1") Integer page,
+            @CheckPage @RequestParam(defaultValue = "1") Integer page,
             @PathVariable Long restaurantId
     );
 

@@ -7,12 +7,15 @@ import com.example.umc9thStudy.domain.mission.exception.code.MemberMissionSucces
 import com.example.umc9thStudy.domain.mission.exception.code.MissionSuccessCode;
 import com.example.umc9thStudy.domain.mission.service.command.MissionService;
 import com.example.umc9thStudy.domain.mission.service.query.MissionQueryService;
+import com.example.umc9thStudy.global.annotation.CheckPage;
 import com.example.umc9thStudy.global.apiPayload.ApiResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 public class MissionController implements MissionControllerDocs{
 
     private final MissionService missionService;
@@ -30,10 +33,11 @@ public class MissionController implements MissionControllerDocs{
     //특정 가게 미션 조회
     @GetMapping("api/missions/{restaurantId}")
     public ApiResponse<MissionResponse.RestaurantMissionListDTO> getRestaurantMissions(
-            @RequestParam(defaultValue = "1") Integer page,
+            @CheckPage @RequestParam(defaultValue = "1") Integer page,
             @PathVariable Long restaurantId
     ){
+        int adjustedPage = page - 1;
         MissionSuccessCode code = MissionSuccessCode.MISSION_OK;
-        return ApiResponse.onSuccess(code, missionQueryService.getRestaurantMissions(restaurantId, page));
+        return ApiResponse.onSuccess(code, missionQueryService.getRestaurantMissions(restaurantId, adjustedPage));
     }
 }
