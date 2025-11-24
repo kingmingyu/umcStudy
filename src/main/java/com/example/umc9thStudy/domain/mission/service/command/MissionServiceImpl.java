@@ -16,6 +16,7 @@ import com.example.umc9thStudy.domain.mission.repository.MemberMissionRepository
 import com.example.umc9thStudy.domain.mission.repository.MissionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +27,7 @@ public class MissionServiceImpl implements MissionService{
     private final MissionRepository missionRepository;
 
     @Override
+    @Transactional
     public MissionResponse.MemberMissionResponse addMemberMission(Long memberId, Long missionId){
         Member member = memberRepository.findById(memberId).orElseThrow(() -> new MemberException(MemberErrorCode.MEMBER_NOT_FOUND));
         Mission mission = missionRepository.findById(missionId).orElseThrow(() -> new MissionException(MissionErrorCode.MISSION_NOT_FOUND));

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.List;
+
 public class MissionResponse {
 
     @Getter
@@ -30,5 +32,22 @@ public class MissionResponse {
             int rewardPoint,
             Long minimumPrice,
             Restaurant restaurant
+    ){}
+
+    @Builder
+    public record RestaurantMissionListDTO(
+            List<RestaurantMissionDTO> missionList,
+            Integer listSize,
+            Integer totalPage,
+            Long totalElements,
+            Boolean isFirst,
+            Boolean isLast
+
+    ){}
+    @Builder
+    public record RestaurantMissionDTO(
+            int reviewPoint,
+            Long minimumPrice,
+            int isActive
     ){}
 }
