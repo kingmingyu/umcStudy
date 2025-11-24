@@ -1,16 +1,13 @@
 package com.example.umc9thStudy.domain.mission.repository;
 
 import com.example.umc9thStudy.domain.member.entity.Member;
-import com.example.umc9thStudy.domain.mission.dto.res.MissionResponse;
 import com.example.umc9thStudy.domain.mission.entity.MemberMission;
 import com.example.umc9thStudy.domain.mission.entity.Mission;
 import com.example.umc9thStudy.domain.mission.enums.Status;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
-import java.util.List;
 /*
 1주차 작성 쿼리
 
@@ -40,31 +37,33 @@ ORDER BY m.mission_id DESC
 LIMIT ?;
  */
 public interface MemberMissionRepository extends JpaRepository<MemberMission, Long> {
-    @Query(
-            // DTO로 r.name, m.minimumPrice, m.reward 조회하기
-            "SELECT new com.example.umc9thStudy.domain.mission.dto.res.MissionResponse$MyMissionResponse(r.name, m.minimumPrice, m.rewardPoint)" +
-
-                    //JPQL로 조회
-                    "FROM MemberMission mm "+
-                    "JOIN mm.mission m " +
-                    "JOIN m.restaurant r "+
-
-                    "WHERE mm.member.id = :userId " + //mm이 가진 m에 접근 후 id를 받아옴
-                    "AND mm.status = :status " +
-
-                    //페이징
-                    "AND (:lastMissionId IS NULL OR m.id < :lastMissionId)" +
-
-                    "ORDER BY m.id DESC"
-    )
-    List<MissionResponse.MyMissionResponse> findMyMission(
-            @Param("userId") Long userId,
-            @Param("status") Status status,
-            @Param("lastMissionId") Long lastMissionId,
-            Pageable pageable
-    );
+//    @Query(
+//            // DTO로 r.name, m.minimumPrice, m.reward 조회하기
+//            "SELECT new com.example.umc9thStudy.domain.mission.dto.res.MissionResponse$MyMissionResponse(r.name, m.minimumPrice, m.rewardPoint)" +
+//
+//                    //JPQL로 조회
+//                    "FROM MemberMission mm "+
+//                    "JOIN mm.mission m " +
+//                    "JOIN m.restaurant r "+
+//
+//                    "WHERE mm.member.id = :userId " + //mm이 가진 m에 접근 후 id를 받아옴
+//                    "AND mm.status = :status " +
+//
+//                    //페이징
+//                    "AND (:lastMissionId IS NULL OR m.id < :lastMissionId)" +
+//
+//                    "ORDER BY m.id DESC"
+//    )
+//    List<MissionResponse.MyMissionResponse> findMyMission(
+//            @Param("userId") Long userId,
+//            @Param("status") Status status,
+//            @Param("lastMissionId") Long lastMissionId,
+//            Pageable pageable
+//    );
 
     long countByMemberIdAndStatus(Long memberId, Status status);
 
     boolean existsByMemberAndId(Member member, Mission mission);
+
+    Page<MemberMission> findAllByMemberAndStatus(Member member, Status status, Pageable pageRequest);
 }

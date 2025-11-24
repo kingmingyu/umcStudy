@@ -9,14 +9,21 @@ import java.util.List;
 
 public class MissionResponse {
 
-    @Getter
     @Builder
-    @AllArgsConstructor
-    public static class MyMissionResponse {
-        private String restaurantName;
-        private Long minimumPrice;
-        private int rewardPoint;
-    }
+    public record MyMissionListDTO(
+            List<MyMissionResponse> myMissionList,
+            Integer listSize,
+            Integer totalPage,
+            Long totalElements,
+            Boolean isFirst,
+            Boolean isLast
+    ){}
+    @Builder
+    public record MyMissionResponse (
+            String restaurantName,
+            Long minimumPrice,
+            int rewardPoint
+    ){}
 
     @Getter
     @Builder
