@@ -4,6 +4,7 @@ import com.example.umc9thStudy.global.apiPayload.ApiResponse;
 import com.example.umc9thStudy.global.apiPayload.code.BaseErrorCode;
 import com.example.umc9thStudy.global.apiPayload.code.GeneralErrorCode;
 import com.example.umc9thStudy.global.apiPayload.exception.GeneralException;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -57,5 +58,13 @@ public class GeneralExceptionAdvice {
 
         // 에러 코드, 메시지와 함께 errors를 반환
         return ResponseEntity.status(code.getStatus()).body(errorResponse);
+    }
+
+    //페이지 검사
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ApiResponse<Object> onConstrainException(ConstraintViolationException e){
+
+        GeneralErrorCode code = GeneralErrorCode.PAGE_VALID_FAIL;
+        return ApiResponse.onFailure(code, null);
     }
 }
