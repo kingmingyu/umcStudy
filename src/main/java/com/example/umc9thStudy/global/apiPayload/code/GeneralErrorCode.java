@@ -30,7 +30,8 @@ public enum GeneralErrorCode implements BaseErrorCode {
     VALID_FAIL(HttpStatus.BAD_REQUEST,
             "VALID400_1",
             "유효성 검사에 실패했습니다"),
-    PAGE_VALID_FAIL(HttpStatus.BAD_REQUEST, "PAGE400_1", "페이지 검사에 실패했습니다.")
+    PAGE_VALID_FAIL(HttpStatus.BAD_REQUEST, "PAGE400_1", "페이지 검사에 실패했습니다."),
+    UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "AUTH401_1", "인증이 필요합니다.")
     ;
 
     // 필요한 필드값 선언

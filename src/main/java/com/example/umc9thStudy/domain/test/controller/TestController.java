@@ -24,11 +24,11 @@ public class TestController {
     public ApiResponse<TestResponseDTO.Testing> test() throws Exception{
         //응답 코드 정의
         GeneralSuccessCode code = GeneralSuccessCode.OK;
-        throw new TestException(GeneralErrorCode.INTERNAL_SERVER_ERROR_500);
-//        return ApiResponse.onSuccess(
-//                code,
-//                TestConverter.toTestingDto("This is test")
-//        );
+        //throw new TestException(GeneralErrorCode.INTERNAL_SERVER_ERROR_500);
+        return ApiResponse.onSuccess(
+                code,
+                TestConverter.toTestingDto("This is test")
+        );
     }
 
     @GetMapping("/exception")

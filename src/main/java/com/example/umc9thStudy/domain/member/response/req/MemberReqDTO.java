@@ -15,6 +15,8 @@ public class MemberReqDTO {
             String name,
             @NotBlank
             String email,
+            @NotBlank
+            String password,
             @NotNull
             Gender gender,
             @NotNull
@@ -23,5 +25,13 @@ public class MemberReqDTO {
             String address,
             @ExistFoods
             List<Long> memberFood
+    ){}
+
+    // 로그인
+    public record LoginDTO(
+            @NotBlank
+            String email,
+            @NotBlank
+            String password
     ){}
 }
