@@ -5,6 +5,7 @@ import com.example.umc9thStudy.domain.member.converter.MemberFoodConverter;
 import com.example.umc9thStudy.domain.member.entity.Food;
 import com.example.umc9thStudy.domain.member.entity.Member;
 import com.example.umc9thStudy.domain.member.entity.MemberFood;
+import com.example.umc9thStudy.domain.member.enums.Role;
 import com.example.umc9thStudy.domain.member.exception.FoodException;
 import com.example.umc9thStudy.domain.member.exception.code.FoodErrorCode;
 import com.example.umc9thStudy.domain.member.repository.FoodRepository;
@@ -13,6 +14,7 @@ import com.example.umc9thStudy.domain.member.repository.MemberRepository;
 import com.example.umc9thStudy.domain.member.response.req.MemberReqDTO;
 import com.example.umc9thStudy.domain.member.response.res.MemberResDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +28,7 @@ public class MemberCommandServiceImpl implements MemberCommandService{
     private final MemberRepository memberRepository;
     private final MemberFoodRepository memberFoodRepository;
     private final FoodRepository foodRepository;
+    private final PasswordEncoder passwordEncoder;
 
     // 회원 가입
     @Override
@@ -33,8 +36,9 @@ public class MemberCommandServiceImpl implements MemberCommandService{
     public MemberResDTO.JoinDTO signup(
             MemberReqDTO.JoinDTO dto
     ){
+        String salt = passwordEncoder.encode(dto.password());
         // 사용자 생성
-        Member member = MemberConverter.toMember(dto);
+        Member member = MemberConverter.toMember(dto, salt, Role.ROLE_USER);
 
         // 사용자 저장
         memberRepository.save(member);
